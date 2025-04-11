@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=3 uid="uid://03hf5j5an858"]
+
+[ext_resource type="Texture2D" uid="uid://dq202278iive8" path="res://asstes/pong_background.png" id="1_ruu04"]
+[ext_resource type="FontFile" uid="uid://mvncxcfj7oki" path="res://asstes/slkscrb.ttf" id="2_bwf2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxyy2"]
+size = Vector2(7.91667, 68.642)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfsxu"]
+size = Vector2(10, 9.87655)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtahp"]
+size = Vector2(479.583, 51.4198)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v3ip"]
+size = Vector2(480.417, 48.889)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylesw"]
+size = Vector2(24.1667, 319.506)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flw4c"]
+size = Vector2(26.6667, 320)
+
+[node name="Main" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(1, 1)
+scale = Vector2(2.4, 2.025)
+texture = ExtResource("1_ruu04")
+centered = false
+
+[node name="Player" type="StaticBody2D" parent="."]
+position = Vector2(14.1667, 157.037)
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_right = 8.0
+offset_bottom = 34.5
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(3.95833, 0.49382)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_fxyy2")
+
+[node name="CPU" type="StaticBody2D" parent="."]
+position = Vector2(459.167, 162.469)
+
+[node name="ColorRect" type="ColorRect" parent="CPU"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_right = 8.0
+offset_bottom = 34.5
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU"]
+position = Vector2(3.75, 0.493835)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_fxyy2")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(240, 164)
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(4.17233e-07, -9.23872e-07)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_wfsxu")
+
+[node name="Borders" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(239.792, -26.2037)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_dtahp")
+
+[node name="bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(239.792, 343.703)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_8v3ip")
+
+[node name="score_left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_left"]
+position = Vector2(-11.6667, 158.765)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_ylesw")
+
+[node name="score_right" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_right"]
+position = Vector2(492.917, 159.506)
+scale = Vector2(1, 0.999999)
+shape = SubResource("RectangleShape2D_flw4c")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Player_score" type="Label" parent="HUD"]
+offset_left = 440.0
+offset_top = 64.0
+offset_right = 513.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("2_bwf2h")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPU_score" type="Label" parent="HUD"]
+offset_left = 640.0
+offset_top = 64.0
+offset_right = 713.0
+offset_bottom = 129.0
+theme_override_fonts/font = ExtResource("2_bwf2h")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ball_timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
